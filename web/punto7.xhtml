@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:panel id="pnlLibros">
+            <h:form id="frmLibros">
+                <p:panelGrid id="gridLibros" columns="2">
+                    <f:facet name="header">
+                     Registrar Libro
+                   </f:facet>
+                    <p:outputLabel value="ISBN:"/>
+                    <p:inputText value="#{registroLibroFormBean.isbn}"/>
+                    <p:outputLabel value="Titulo:"/>
+                    <p:inputText value="#{registroLibroFormBean.titulo}"/>
+                    <p:outputLabel value="Autor:"/>
+                    <p:inputText value="#{registroLibroFormBean.autor}"/>
+                    <p:outputLabel value="Precio:"/>
+                    <p:inputNumber value="#{registroLibroFormBean.precio}"  />
+                    <p:commandButton update="basicDT" actionListener="#{registroLibroFormBean.registrarLibro()}" value="Registrar"></p:commandButton>
+                </p:panelGrid>
+                <p:dataTable id="basicDT" var="lib" value="#{registroLibroFormBean.objLista.listaDeLibro}" style="margin-top: 10px">
+                    <f:facet name="header">
+                       Tabla de Libros
+                    </f:facet>
+                    <p:column headerText="ISBN">
+                        <h:outputText value="#{lib.isbn}" />
+                    </p:column>
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{lib.titulo}" />
+                    </p:column>
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{lib.autor}" />
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{lib.precio}"/>
+                        
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+

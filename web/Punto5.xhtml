@@ -18,7 +18,7 @@
                     </p:inputText>          
                        
                     <p:outputLabel id="lblNombre" for="txtNombre" value="nombre"/>
-                    <p:inputText id="txtNombre" value="#{profesorBeanForms.profesor.nombre}" required="true" maxlength="15"/>
+                    <p:inputText id="txtNombre" value="#{profesorBeanForms.profesor.nombre}" required="true" maxlength="15"  requiredMessage="ingrese letras sin .,*,·%·%·$·$" validatorMessage="Ingrese Nombre"/>
                     <p:outputLabel id="lblApellido" for="txtApellido" value="Apellido"/>
                     <p:inputText id="txtApellido" required="true" value="#{profesorBeanForms.profesor.apellido}"/>
                     <p:outputLabel id="lblFechaNacimiento" for="txtFechaNacimiento" value="Fecha de Registro"/>

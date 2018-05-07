@@ -9,13 +9,14 @@
     </h:head>
     <h:body>
         <p:panel id="pnlFactorial" header="Calculadora" style="width: 700px;"  footer="P-V 2018">
-     <h:form id="registroProfesorForm">
+     <p:growl id="growlGral"> </p:growl>
+            <h:form id="registroProfesorForm">
             <h:panelGrid columns="2">
                
-                <p:inputText id="txtLegajo" value="#{calculadoraFormBean.calculadoraBean.casio.n1}"    converter="javax.faces.Integer"
-                             required="true">
-                    <f:validateLongRange minimum="1"/>
-                </p:inputText>
+                <p:inputText id="txtLegajo" value="#{calculadoraFormBean.calculadoraBean.casio.n1}"    converter="javax.faces.Integer" required="true"  requiredMessage="Debe Ingresar Solo Numeros Enteros de 4 asta 5" validatorMessage="Maximo de numeros permitidos 5 numeros">            
+                        <f:validateLength maximum="5" minimum="4"/>
+                    </p:inputText> 
+                 
                
                 <p:inputText id="txtApellido" value="#{calculadoraFormBean.calculadoraBean.casio.n2}"     converter="javax.faces.Integer"
                              required="true">

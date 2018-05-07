@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro de Profesor</title>
+    </h:head>
+    <h:body>
+        <p:panel id="pnlRegistroProfesor"  header="Registro de Profesores" >
+            <p:growl id="growlGral"> </p:growl>
+            <h:form id="fmrRegistroProfesor" class="container">
+                <h:panelGrid id ="tblRegistroProfesor">
+                    <p:outputLabel id="lblLegajo" for="txtLegajo" value="Legajo"/>
+                    <p:inputText id="txtLegajo" value="#{profesorBeanForms.profesor.legajo}" required="true"  requiredMessage="Debe Ingresar Solo Numeros Enteros de 4 asta 5" validatorMessage="Maximo de numeros permitidos 5 numeros">            
+                        <f:validateLength maximum="5" minimum="4"/>
+                    </p:inputText>          
+                       
+                    <p:outputLabel id="lblNombre" for="txtNombre" value="nombre"/>
+                    <p:inputText id="txtNombre" value="#{profesorBeanForms.profesor.nombre}" required="true" maxlength="15"/>
+                    <p:outputLabel id="lblApellido" for="txtApellido" value="Apellido"/>
+                    <p:inputText id="txtApellido" required="true" value="#{profesorBeanForms.profesor.apellido}"/>
+                    <p:outputLabel id="lblFechaNacimiento" for="txtFechaNacimiento" value="Fecha de Registro"/>
+                    <p:inputText id="txtFechaNacimiento" value="#{profesorBeanForms.profesor.fechaRegistro}" required="true" maxlength="10" validatorMessage="Ingrese en formato dd-mm-YYYY">
+                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                          </p:inputText>
+                <p:commandButton id="btnRegistroProfesor" value="Registrar Profesor"
+                                 actionListener="#{profesorBeanForms.agregarProfesor()}" update=":fmrProfesores growlGral"/> 
+                </h:panelGrid>  
+                
+            </h:form>
+               
+            <h:panelGrid>
+                <h:form id="fmrProfesores" >
+                    <p:dataTable id="tblNombre" value="#{profesorBeanForms.listaProfesor}" var="prof">
+                        <p:column headerText="Legajo">   
+                            <p:outputLabel  value="#{prof.legajo}"/>
+                        </p:column>  
+                        <p:column headerText="Apellido">   
+                            <p:outputLabel value="#{prof.apellido}"/>
+                        </p:column>
+                        <p:column headerText="Nombre">     
+                            <p:outputLabel value="#{prof.nombre}"/> 
+                        </p:column>   
+                        <p:column headerText="Registrado">  
+                            <p:outputLabel value="#{prof.fechaRegistro}"/>
+                        </p:column>
+                    </p:dataTable> 
+                </h:form>
+            </h:panelGrid>
+        </p:panel>
+    </h:body>
+</html>
+

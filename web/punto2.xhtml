@@ -11,13 +11,14 @@
     <h:body>
         <h:form>
             <p:panel>
+                <p:growl id="mensajes"/>
                 <h:panelGrid columns="2">
-                    <p:outputLabel value="Ingrese numero:"/>
-                    <p:inputText value="#{contenedorManagebeans.n}"/>
+                    <p:outputLabel value="Ingrese numero:" for="txtvalor"/>
+                    <p:inputText id="txtvalor" value="#{contenedorManagebeans.n}" required="true"/>
                 </h:panelGrid> 
-                <p:commandButton value="Registrar" actionListener="#{contenedorManagebeans.registrarNumero()}" update="tblnum"/>
+                <p:commandButton value="Registrar" actionListener="#{contenedorManagebeans.registrarNumero()}" update="tblnum mensajes"/>
                 
-                <p:commandButton value="Calcular maximo,minimo y promedio"  update="output" actionListener="#{contenedorManagebeans.calcular()}" oncomplete="PF('dlg').show()" />
+                <p:commandButton value="Calcular maximo,minimo y promedio"  update="output " actionListener="#{contenedorManagebeans.calcular()}" oncomplete="PF('dlg').show()" />
                 
                 <p:dataTable id="tblnum"  var="car" value="#{contenedorManagebeans.listaNumeros}" style="width:400px; margin-top: 20px ">
                   <p:column headerText="Tabla de numeros">
@@ -25,17 +26,17 @@
                   </p:column>
                </p:dataTable>
             </p:panel>
-    <p:dialog header="Resultados"  showEffect="fade" widgetVar="dlg">
+       </h:form>
+        <p:dialog header="Resultados"  showEffect="fade" widgetVar="dlg">
         <p:panelGrid id="output" columns="2" columnClasses="label, value">
             <h:outputText value="numero mayor:" />
             <h:outputText value="#{contenedorManagebeans.mayor}" />
             <h:outputText value="numero menor:" />
             <h:outputText value="#{contenedorManagebeans.menor}" />
-             <h:outputText value="promedio:" />
+            <h:outputText value="promedio:" />
              <h:outputText value="#{contenedorManagebeans.promedio}" />
         </p:panelGrid>
-    </p:dialog>
-        </h:form>
+       </p:dialog>
     </h:body>
 </html>
 

@@ -7,9 +7,11 @@ package punto2.beans;
 
 import punto2.dominio.ContenedorNumero;
 import java.util.ArrayList;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -86,6 +88,7 @@ public class ContenedorManagebeans {
     }
     
     public void calcular(){
+     
       mayor=calculos.calcularMayor( listaNumeros);
       menor=calculos.calcularMenor(listaNumeros);
       promedio=calculos.calcularPromedio(listaNumeros);

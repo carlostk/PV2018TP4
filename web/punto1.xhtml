@@ -11,9 +11,10 @@
         
         <h:form>
             <p:panel header="Conversor de Temperatura" style=" width: 450px ">
+            <p:growl id="mensajes"/>
             <h:panelGrid columns="2">
-                <p:outputLabel value="Ingrese numero"/>
-                <p:inputText value="#{contenedorManageBean.n}"/>
+                <p:outputLabel value="Ingrese numero" for="txtvalor"/>
+                <p:inputText id="txtvalor" value="#{contenedorManageBean.n}" required="true"/>
             </h:panelGrid>
             <br></br>
             <h:panelGrid columns="4">
@@ -31,7 +32,7 @@
                     <f:selectItem itemLabel="Kelvin" itemValue="K"/>
                 </p:selectOneMenu>
             </h:panelGrid>
-            <p:commandButton value="convertir" update="lblResultado"/>
+            <p:commandButton value="convertir" update="lblResultado mensajes"/>
             <p:outputLabel id="lblResultado" value="el resultado es #{contenedorManageBean.convertirUnidades()}"/>
             </p:panel>
         </h:form>

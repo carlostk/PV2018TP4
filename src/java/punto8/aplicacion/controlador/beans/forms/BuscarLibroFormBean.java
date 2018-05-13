@@ -6,9 +6,13 @@
 package punto8.aplicacion.controlador.beans.forms;
 
 
+import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 import punto8.aplicacion.modelo.dominio.Libro;
 import punto8.aplicacion.modelo.dominio.ListaDeLibro;
 
@@ -18,34 +22,30 @@ import punto8.aplicacion.modelo.dominio.ListaDeLibro;
  */
 @ManagedBean
 @ViewScoped
-public class RegistroLibroFormBean {
-    ListaDeLibro objLista = new ListaDeLibro();
+public class BuscarLibroFormBean implements Serializable{
+    private ListaDeLibro objLista = new ListaDeLibro();
     private String buscado;
     private String isbn;
     private String titulo;
     private String autor;
     private float precio;
     
-    public RegistroLibroFormBean() {
+    public BuscarLibroFormBean() {
     }
     public void registrarLibro(){
       Libro objLibro = new Libro(isbn,titulo,autor,precio);
       objLista.cargarListaDeLibro(objLibro);
     }
    public void buscarLibro(){
-     if(objLista.buscarLibroPorTitulo(buscado)!= null)
+    if(objLista.buscarLibroPorTitulo(buscado).size()== 0)
      {
-       isbn=objLista.buscarLibroPorTitulo(buscado).getIsbn();
-       titulo=objLista.buscarLibroPorTitulo(buscado).getTitulo();
-       autor=objLista.buscarLibroPorTitulo(buscado).getAutor();
-       precio=objLista.buscarLibroPorTitulo(buscado).getPrecio();
+        FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Libro no encontrado","Libro no encontrado");
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.addMessage(null, mensaje);  
+       
+       
      }
-     else{
-          isbn="";
-          titulo="";
-          autor="";
-          precio=0;
-        }
+     
    }
 
     public String getIsbn() {
@@ -95,6 +95,8 @@ public class RegistroLibroFormBean {
     public void setBuscado(String buscado) {
         this.buscado = buscado;
     }
+
+   
 
    
     

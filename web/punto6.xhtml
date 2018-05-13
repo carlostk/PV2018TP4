@@ -8,8 +8,8 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form>
-           <p:dataTable id="basicDT" var="car" value="#{autosFormBean.unArregloDeAuto.arregloDeAuto}" >
+        <h:form id="basicDT">
+            <p:dataTable  var="car" value="#{autosFormBean.arregloDeAutos}" >
               <f:facet name="header">
                   Tabla de autos
               </f:facet>
@@ -29,33 +29,39 @@
                 <h:outputText value="#{car.tipoDeConbustible}" />
               </p:column>
               <p:column >
-                 <p:commandButton update="@([id$=carse])"   value="modificar" oncomplete="PF('dlg').show()">
-                 <f:setPropertyActionListener value="#{car}" target="#{autosFormBean.objauto}" />
-                 </p:commandButton>
+                  <p:commandButton update="@([id$=carse]) " actionListener="#{autosFormBean.elejirAuto(car)}"   value="modificar" oncomplete="PF('dlg').show()">
+                  </p:commandButton>
               </p:column>
            </p:dataTable>
-           <p:dialog header="auto"  widgetVar="dlg" closable="false" >
-             <p:panelGrid id="carse"  columns="2" columnClasses="label,value">
-                <h:outputText value="Patente:" />
-                <p:inputText value="#{autosFormBean.objauto.patente}" />
- 
-                <h:outputText value="Año" />
-                <p:inputText value="#{autosFormBean.objauto.marca}"/>
- 
-                <h:outputText value="Modelo:" />
-                <p:inputText value="#{autosFormBean.objauto.modelo}"/>
- 
-                <h:outputText value="Color" />
-                <p:inputText value="#{autosFormBean.objauto.color}"/>
-                
-                <h:outputText value="Tipo de Combustible" />
-                <p:inputText value="#{autosFormBean.objauto.tipoDeConbustible}"/>
-             </p:panelGrid>
-                <p:commandButton value="Aseptar"  actionListener="#{autosFormBean.modificar()}" style="margin-top: 5px"></p:commandButton>
-                <p:commandButton value="Cerrar"  update="basicDT" oncomplete="PF('dlg').hide()" style="margin-top: 5px"></p:commandButton>
-          </p:dialog>  
-    
+            
+          
        </h:form>
+        <p:dialog header="auto"  widgetVar="dlg" closable="false" >
+            <h:form id="carse1">
+            <p:growl id="mensajes"/>
+             <p:panelGrid id="carse"  columns="2" columnClasses="label,value">
+                 <p:outputLabel value="Patente:" for="txtpatente"/>
+                <p:inputText id="txtpatente" value="#{autosFormBean.objauto.patente}" required="true"/>
+                
+                <p:outputLabel value="Año" for="txtaño" />
+                <p:inputText id="txtaño" value="#{autosFormBean.año}" required="true"/>
+ 
+                 <p:outputLabel value="Modelo:" for="txtmodelo"/>
+                 <p:inputText id="txtmodelo" value="#{autosFormBean.objauto.marca}" required="true" />
+ 
+                <p:outputLabel value="Color" for="txtcolor"/>
+                <p:inputText id="txtcolor" value="#{autosFormBean.objauto.color}" required="true"/>
+                
+                <p:outputLabel value="Tipo de Combustible" for="txtTipoDeC" />
+                <p:inputText id="txtTipoDeC" value="#{autosFormBean.objauto.tipoDeConbustible}" required="true"/>
+               
+             </p:panelGrid>
+            <p:commandButton  value="Aseptar" actionListener="#{autosFormBean.modificar()}"   style="margin-top: 5px" update="@([id$=basicDT]) mensajes " />
+            <p:commandButton   value="Cerrar"   oncomplete="PF('dlg').hide()" style="margin-top: 5px"></p:commandButton>
+            </h:form>
+          </p:dialog> 
+        
+        
     </h:body>
 </html>
 

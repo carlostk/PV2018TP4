@@ -5,13 +5,14 @@
  */
 package punto6.aplicacion.modelo.dominio;
 
-import java.util.Scanner;
+import java.io.Serializable;
+
 
 /**
  *
  * @carlos
  */
-public class Auto {
+public class Auto implements Serializable{
 
     private String patente;
     private String marca;

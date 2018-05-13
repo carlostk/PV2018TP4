@@ -8,9 +8,11 @@ package punto6.aplicacion.controlador.beans.forms;
 import punto6.aplicacion.modelo.dominio.ArregloDeAuto;
 import punto6.aplicacion.modelo.dominio.Auto;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 
 
@@ -25,16 +27,36 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class AutosFormBean implements Serializable{
-   int tamanioDelArregloDeAuto = 6;
-   ArregloDeAuto unArregloDeAuto = new ArregloDeAuto();
-   Auto objauto = new Auto();
-   
+   private int tamanioDelArregloDeAuto = 6;
+   private Auto objauto = new Auto();
+   private Auto[] arregloDeAutos=new Auto[tamanioDelArregloDeAuto];
+   private ArregloDeAuto unArregloDeAuto =new ArregloDeAuto();
+   private int año;
     public AutosFormBean() {
+        
         unArregloDeAuto.crearArregloDeAuto(tamanioDelArregloDeAuto);
-        unArregloDeAuto.cargarArregloDeAutoPredeterminado();
+        arregloDeAutos=new Auto[tamanioDelArregloDeAuto];
+        unArregloDeAuto.cargarArreglo();
+        arregloDeAutos=unArregloDeAuto.getArregloDeAuto();
+       
     }
+   
     public void modificar(){
-       unArregloDeAuto.modificarOpciones(objauto);
+       if(Integer.toString(año).length() != 4)
+       {
+         año=objauto.getModelo();
+         FacesMessage mensaje = new FacesMessage(FacesMessage.SEVERITY_ERROR,"año tiene que tener  4 digitos","año tiene que tener 4 digitos");
+         FacesContext facesContext = FacesContext.getCurrentInstance();
+         facesContext.addMessage(null, mensaje);
+       }else{
+           objauto.setModelo(año);
+       }
+     
+    }
+    public void elejirAuto(Auto autoElejido){
+       
+      objauto=autoElejido;
+      año=objauto.getModelo();
     }
 
     public int getTamanioDelArregloDeAuto() {
@@ -45,6 +67,24 @@ public class AutosFormBean implements Serializable{
         this.tamanioDelArregloDeAuto = tamanioDelArregloDeAuto;
     }
 
+   
+    
+   public Auto getObjauto() {
+        return objauto;
+    }
+
+    public void setObjauto(Auto objauto) {
+        this.objauto = objauto;
+    }
+
+    public Auto[] getArregloDeAutos() {
+        return arregloDeAutos;
+    }
+
+    public void setArregloDeAutos(Auto[] arregloDeAutos) {
+        this.arregloDeAutos = arregloDeAutos;
+    }
+
     public ArregloDeAuto getUnArregloDeAuto() {
         return unArregloDeAuto;
     }
@@ -53,12 +93,16 @@ public class AutosFormBean implements Serializable{
         this.unArregloDeAuto = unArregloDeAuto;
     }
 
-    public Auto getObjauto() {
-        return objauto;
+    public int getAño() {
+        return año;
     }
 
-    public void setObjauto(Auto objauto) {
-        this.objauto = objauto;
+    public void setAño(int año) {
+        this.año = año;
     }
+  
+   
+
+   
    
 }

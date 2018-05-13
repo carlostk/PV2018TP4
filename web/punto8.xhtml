@@ -10,31 +10,35 @@
     <h:body>
         <p:panel id="pnlLibros">
             <h:form id="frmLibros">
+                <p:growl id="mensajes"/>
                 <p:panelGrid id="gridLibros" columns="2">
                     <f:facet name="header">
                      Registrar Libro
                    </f:facet>
-                    <p:outputLabel value="ISBN:"/>
-                    <p:inputText value="#{registroLibroFormBean.isbn}"/>
-                    <p:outputLabel value="Titulo:"/>
-                    <p:inputText value="#{registroLibroFormBean.titulo}"/>
-                    <p:outputLabel value="Autor:"/>
-                    <p:inputText value="#{registroLibroFormBean.autor}"/>
-                    <p:outputLabel value="Precio:"/>
-                    <p:inputNumber value="#{registroLibroFormBean.precio}"  />
-                    <p:commandButton update="basicDT" actionListener="#{registroLibroFormBean.registrarLibro()}" value="Registrar"></p:commandButton>
+                    <p:outputLabel value="ISBN:" for="txtisbn"/>
+                    <p:inputText id="txtisbn" value="#{buscarLibroFormBean.isbn}" required="true"/>
+                    <p:outputLabel value="Titulo:" for="txtTitulo"/>
+                    <p:inputText id="txtTitulo" value="#{buscarLibroFormBean.titulo}" required="true"/>
+                    <p:outputLabel value="Autor:" for="txtAutor"/>
+                    <p:inputText id="txtAutor" value="#{buscarLibroFormBean.autor}" required="true"/>
+                    <p:outputLabel value="Precio:" for="txtPrecio"/>
+                    <p:inputNumber id="txtPrecio" value="#{buscarLibroFormBean.precio}" required="true"><f:validateLongRange  minimum="1"/></p:inputNumber>
+                    <p:commandButton update="@([id$=basicDT]) mensajes" actionListener="#{buscarLibroFormBean.registrarLibro()}" value="Registrar"></p:commandButton>
                 </p:panelGrid>
+                </h:form>
+            <h:form id="fmrbuscar">
+                <p:growl id="mensajes1"/>
                 <p:panelGrid  columns="2">
                     <f:facet name="header">
                      Buscar Libro
                     </f:facet>
-                    <p:outputLabel value="Ingrese Autor:"/>
-                    <p:inputText value="#{registroLibroFormBean.buscado}"/>
-                   <p:commandButton update="@([id$=carse])"   value="Buscar" actionListener="#{registroLibroFormBean.buscarLibro()}" oncomplete="PF('dlg').show()">
+                    <p:outputLabel value="Ingrese Autor:" for="buscar" />
+                    <p:inputText id="buscar" value="#{buscarLibroFormBean.buscado}"  required="true"/>
+                    <p:commandButton update="@([id$=basicDT]) mensajes1"   value="Buscar" actionListener="#{buscarLibroFormBean.buscarLibro()}" >
                       
                    </p:commandButton>
                 </p:panelGrid>
-                <p:dataTable id="basicDT" var="lib" value="#{registroLibroFormBean.objLista.listaDeLibro}" style="margin-top: 10px">
+                <p:dataTable id="basicDT" var="lib" value="#{buscarLibroFormBean.objLista.listaDeLibro}" style="margin-top: 10px">
                     <f:facet name="header">
                        Tabla de Libros
                     </f:facet>
@@ -54,24 +58,7 @@
                 </p:dataTable>
          
             </h:form>
-              <p:dialog header="Libro"  widgetVar="dlg" closable="false" >
-              <p:panelGrid id="carse"  columns="2" columnClasses="label,value">
-                <h:outputText value="Isbn:" />
-                <p:inputText value="#{registroLibroFormBean.isbn}" />
- 
-                <h:outputText value="Titulo" />
-                <p:inputText value="#{registroLibroFormBean.titulo}"/>
- 
-                <h:outputText value="Autor" />
-                <p:inputText value="#{registroLibroFormBean.autor}"/>
- 
-                <h:outputText value="Precio" />
-                <p:inputText value="#{registroLibroFormBean.precio}"/>
-                
-               
-              </p:panelGrid>
-                <p:commandButton value="Cerrar"   oncomplete="PF('dlg').hide()" style="margin-top: 5px"></p:commandButton>
-            </p:dialog> 
+              
         </p:panel>
     </h:body>
 </html>

@@ -28,6 +28,7 @@ public class RegistroLibroFormBean {
     public RegistroLibroFormBean() {
     }
     public void registrarLibro(){
+      
       Libro objLibro = new Libro(isbn,titulo,autor,precio);
       objLista.cargarListaDeLibro(objLibro);
     }

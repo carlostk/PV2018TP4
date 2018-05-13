@@ -10,19 +10,21 @@
     <h:body>
         <p:panel id="pnlLibros">
             <h:form id="frmLibros">
+                <p:growl id="mensajes"/>
                 <p:panelGrid id="gridLibros" columns="2">
                     <f:facet name="header">
                      Registrar Libro
                    </f:facet>
-                    <p:outputLabel value="ISBN:"/>
-                    <p:inputText value="#{registroLibroFormBean.isbn}"/>
-                    <p:outputLabel value="Titulo:"/>
-                    <p:inputText value="#{registroLibroFormBean.titulo}"/>
-                    <p:outputLabel value="Autor:"/>
-                    <p:inputText value="#{registroLibroFormBean.autor}"/>
-                    <p:outputLabel value="Precio:"/>
-                    <p:inputNumber value="#{registroLibroFormBean.precio}"  />
-                    <p:commandButton update="basicDT" actionListener="#{registroLibroFormBean.registrarLibro()}" value="Registrar"></p:commandButton>
+                    <p:outputLabel value="ISBN:" for="txtIsbn"/>
+                    <p:inputText id="txtIsbn" value="#{registroLibroFormBean.isbn}" required="true"/>
+                    <p:outputLabel  value="Titulo:" for="txtTitulo"/>
+                    <p:inputText id="txtTitulo" value="#{registroLibroFormBean.titulo}" required="true"/>
+                    <p:outputLabel value="Autor:" for="txtAutor"/>
+                    <p:inputText id="txtAutor" value="#{registroLibroFormBean.autor}" required="true" />
+                    <p:outputLabel value="Precio:" for="txtPrecio"/>
+                    
+                    <p:inputNumber id="txtPrecio" value="#{registroLibroFormBean.precio}" required="true"><f:validateLongRange  minimum="1"/></p:inputNumber>
+                    <p:commandButton update="basicDT mensajes" actionListener="#{registroLibroFormBean.registrarLibro()}" value="Registrar"></p:commandButton>
                 </p:panelGrid>
                 <p:dataTable id="basicDT" var="lib" value="#{registroLibroFormBean.objLista.listaDeLibro}" style="margin-top: 10px">
                     <f:facet name="header">

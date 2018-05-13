@@ -35,7 +35,7 @@ public class letrasBean implements Serializable{
         letra=0;
         letrasIngr = new ArrayList<>();
         palabra = new String();
-        intentos = 5;
+        intentos = 10;
     }
 
     public String mostrarEstadoDePalabra() {
@@ -91,7 +91,7 @@ public class letrasBean implements Serializable{
 
     public void cargarPalabra() {
         listaLetras = new ArrayList<>();
-        intentos=5;
+        intentos=10;
         for (int i = 0; i < palabra.length(); i++) {
             listaLetras.add(new Letra(palabra.charAt(i), false));
         }
